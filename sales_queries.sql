@@ -105,4 +105,13 @@ JOIN order_details od ON pz.pizza_id = od.pizza_id
 GROUP BY pt.category
 ORDER BY revenue DESC
 LIMIT 5;
+
+#2.Analyze the cumulative revenue generated over time.
+
+select orde.order_date,round(sum(pz.price*od.quantity),2) as revenue
+from order_details od join pizzas pz  on od.pizza_id = pz.pizza_id
+join orders orde on od.order_id = orde.order_id
+group by orde.order_date
+having orde.order_date="2015-12-11"
+order by revenue desc   
   
